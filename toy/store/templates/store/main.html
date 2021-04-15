@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1110" />
+    {% block title %}Toydastarkhan.kz{% endblock title %}
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawes.css' %}">
+    <!-- CSS only -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="{% static 'libs/owl-carousel/assets/owl.carousel.min.css' %}" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap&subset=cyrillic-ext" rel="stylesheet"/>
+    <!-- Подключение иконок -->
+    <!-- <script src="https://kit.fontawesome.com/36c255653c.js" crossorigin="anonymous"></script> -->
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+        function getToken(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getToken('csrftoken');
+
+
+    function getCookie(name) {
+        // Разделяет строку cookie и получит все отдельные пары имя = значение в массиве
+        var cookieArr = document.cookie.split(";");
+
+        // Проход по элементам массива
+        for(var i = 0; i < cookieArr.length; i++) {
+            var cookiePair = cookieArr[i].split("=");
+
+            // Удаление пробелов в начале имени файла cookie и сравнение его с заданной строкой
+            if(name == cookiePair[0].trim()) {
+                // Расшифруйте значение cookie и верните
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+        // Вернуть null, если не найден
+        return null;
+    }
+    var cart = JSON.parse(getCookie('cart'))
+
+    if (cart == undefined){
+        cart = {}
+        console.log('Cart Created!')
+        document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    }
+    console.log('Cart:', cart)
+    </script>
+
+</head>
+<body>
+
+    <style>
+
+       .hello-msg{
+            padding-left: 5px;
+            font-family: "Roboto", sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            color: #808080;
+            margin-right: 5px;
+        }
+
+        .line{
+            font-family: "Roboto", sans-serif;
+            font-weight: 500;
+            display: contents;
+            color: #808080; 
+        }
+     
+    </style>
+
+<!-- <div class="page"> -->
+    <header class="header">
+        <div class="header__container">
+            <a href="{% url 'store' %}" class="header__logo">
+                <img src="{% static 'images/logo.png' %}" alt="" width="60" height="60">
+                <h5>Toy Dastarkhan</h5>
+            </a>
+            <form class="header__search" method="POST" action="{% url 'search-page' %}" >
+
+                {% csrf_token %}
+
+                <div class="header__search-input-wrapper">
+                    <input
+                        class="header__search-input"
+                        type="text"
+                        placeholder="Поиск"
+                        name="searched"
+                    />
+                </div>
+
+                <div class="header__search-button-wrapper">
+                    <button class="header__search-button" type="submit">
+                        <img src="{% static 'images/icons/search-icon.svg' %}" alt="" />
+                    </button>
+                </div>
+            </form>
+            <div class="header__links">
+                <!-- Cart link -->
+                <a href="{% url 'cart' %}" class="header-link header-link--notify">
+                    <span class="header-link__icon">
+                        <i id="cart-icon" class="fab fa-opencart fa-2x"></i>
+                    </span>
+                    <span id="cart-total" class="header-link__text">{{cartItems}}</span>
+                </a>
+                <!-- // Cart link -->
+                <!-- Wishlist link -->
+                <a href="#" class="header-link">
+                    <span class="header-link__icon">
+                        <i class="far fa-heart fa-2x"></i>
+                    </span>
+                </a>
+                <!-- // Wishlist link -->
+                <!-- User link -->
+                <div class="header__logout">
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'personal' %}" class="hello-msg"> {{request.user}} </a>
+                    <span class="line">
+                        | <a class="hello-msg" href="{% url 'logout' %}">
+                            <i class="fas fa-sign-out-alt fa-2x"></i>
+                        </a>
+                    </span>
+               {% else %}
+                    <a href="{% url 'login' %}" class="header-link">
+                        <span class="header-link__icon">
+                            <i class="fas fa-sign-in-alt fa-2x"></i>   
+                        </span>
+                    </a>
+                {% endif %}
+                </div>
+                <!-- // User link -->
+            </div>
+        </div>
+        <div class="header__nav">
+            <nav class="header-nav">
+                <div class="header-nav__categories">
+                    <a href="{% url 'categories' %}" class="header-mega-menu-link">
+                        <span class="header-mega-menu-link__icon">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="18"
+                                height="12"
+                                viewBox="0 0 18 12"
+                            >
+                                <path
+                                    d="M18 0v2H0V0zM0 5h18v2H0zm0 5h18v2H0z"
+                                />
+                            </svg>
+                        </span>
+                        <span class="header-mega-menu-link__text"
+                            >Категории</span
+                        >
+                    </a>
+                </div>
+                <div class="header-nav__deals">
+                    <a href="/action" class="header-nav__link">Акции</a>
+                    <a href="/nashe_proizvodstvo" class="header-nav__link">Производство</a>
+                    <a href="/receips" class="header-nav__link">Рецепты</a>
+                    <a href="/contacts" class="header-nav__link">Контакты</a>
+                </div>
+
+                <!-- header-nav__select -->
+                <div class="header-nav__select">
+                    <!-- ITEM -->
+                    <div class="header-nav__select-item">
+                        <!-- dropdown nav -->
+                        <div class="nav-dropdown">
+                            <a href="/help" class="nav-dropdown__title">
+                                Помощь
+
+                                <div class="nav-dropdown__title-icon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="8"
+                                        height="5"
+                                        viewBox="0 0 8 5"
+                                    >
+                                        <path
+                                            d="M3.998 5L8 2.5V.104L3.998 2.62 0 0v2.5z"
+                                        />
+                                    </svg>
+                                </div>
+                            </a>
+                            <div class="nav-dropdown__dropdown">
+                                <a
+                                    href="/payment"
+                                    class="nav-dropdown__dropdown-item"
+                                >
+                                    Оплата
+                                </a>
+                                <a
+                                    href="/faq"
+                                    class="nav-dropdown__dropdown-item"
+                                >
+                                    Вопросы
+                                </a>
+                                <a
+                                    href="/delivery"
+                                    class="nav-dropdown__dropdown-item"
+                                >
+                                    Доставка
+                                </a>
+                            </div>
+                        </div>
+                        <!-- // dropdown nav -->
+                    </div>
+                    <!-- // ITEM -->
+                    <!-- ITEM -->
+            
+                    <!-- // ITEM -->
+                    <!-- ITEM -->
+                    <div class="header-nav__select-item">
+                        <!-- dropdown nav -->
+                        <div class="nav-dropdown">
+                            <a href="#" class="nav-dropdown__title">
+                                Язык
+
+                                <div class="nav-dropdown__title-icon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="8"
+                                        height="5"
+                                        viewBox="0 0 8 5"
+                                    >
+                                        <path
+                                            d="M3.998 5L8 2.5V.104L3.998 2.62 0 0v2.5z"
+                                        />
+                                    </svg>
+                                </div>
+                            </a>
+                            <div class="nav-dropdown__dropdown">
+                                <a
+                                    href="#"
+                                    class="nav-dropdown__dropdown-item"
+                                >
+                                    Русский
+                                </a>
+                                <a
+                                    href="#"
+                                    class="nav-dropdown__dropdown-item"
+                                >
+                                    Казахский
+                                </a>
+                            </div>
+                        </div>
+                        <!-- // dropdown nav -->
+                    </div>
+                    <!-- // ITEM -->
+                </div>
+                <!-- // header-nav__select -->
+            </nav>
+        </div>
+    </header>
+
+    {% block carousel %}
+    <section class="carousel-section">
+        <div class="container">
+            <!-- Обертка для карусели -->
+            <div
+                class="carousel owl-carousel owl-theme"
+                id="carousel-header"
+            >
+                <div class="carousel__item">
+                    <h2 class="carousel__item-title">
+                        Самые вкусные блюда у нас!
+                    </h2>
+                    <!-- <div class="carousel__item-text">
+                        <p></p>
+                    </div> -->
+                </div>
+                <div class="carousel__item background-item">
+                    <h2 class="carousel__item-title">
+                        Заказывай!
+                    </h2>
+                    <!-- <div class="carousel__item-text">
+                        <p></p>
+                    </div> -->
+                </div>
+                <div class="carousel__item background-item-three">
+                    <h2 class="carousel__item-title">
+                        Не пожалеешь!
+                    </h2>
+                    <!-- <div class="carousel__item-text">
+                        <p>Start sales</p>
+                    </div> -->
+                </div>
+            </div>
+            <!-- // Обертка для карусели -->
+        </div>
+    </section>
+    {% endblock %}
+
+
+    <main class="main-content">
+        <div class="container">
+            {% block body %}
+                
+            {% endblock body %}
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__up">
+                <a href="{% url 'store' %}" class="footer__logo">
+                    <img src="{% static 'images/logo.png' %}" alt="" width="70" height="70">
+                </a>
+                <div class="footer__nav">
+                    <a class="footer__nav-link" href="#">О компании</a>
+                    <a class="footer__nav-link" href="#">Новости</a>
+                    <a class="footer__nav-link" href="/services">Услуги и сервис</a>
+                    <a class="footer__nav-link" href="/contacts">Контакты</a>
+                </div>
+                <div class="footer__social">
+                    <a class="footer__social-link" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="footer__social-link" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="footer__social-link" href="https://www.instagram.com/toy_dastarhan/" target="_blank" ><i class="fab fa-instagram"></i></a>
+                    <a class="footer__social-link" href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+            <div class="footer__down">
+                <div class="footer__year">
+                    © 2020. Toy Dastarkhan
+                </div>
+                <p>Принимаемые способы оплаты:</p>
+                <div class="footer__payment">
+                    <a class="footer__payment-link" href="#"><img src="{% static 'images/paypal.png' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+<!-- </div> -->
+    
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{% static 'js/cart.js' %}" ></script>
+ <!-- jQuery -->
+ <script src="{% static 'libs/jquery/jquery-3.3.1.min.js' %}"></script>
+ <!-- OwmCarousel -->
+ <script src="{% static 'libs/owl-carousel/owl.carousel.min.js' %}"></script>
+
+ <script src="{% static 'js/header-select.js' %}"></script>
+ <script src="{% static 'js/main.js' %}"></script>  
+</body>
+</html>

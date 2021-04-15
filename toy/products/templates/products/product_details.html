@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% extends 'store/main.html' %}
+{% load static %}
+{% block carousel %}
+
+{% endblock %}
+{% block title %}
+{% endblock title %}
+{% block body%}
+
+<div class="row__details">
+    <div class="product__details">
+        <div class="product__details-foto">
+            <div class="product_details-foto">
+                <img class="details__img"  src="{{product.imageURL}}" alt="">
+            </div>
+        </div>
+        <div class="product__details-buy">
+            <h3 class="product__details-uptext" >{{product.name}}</h3>
+            <p class="product__details-price" >Цена: ${{product.price|floatformat:2}}</p>
+            <div class="product__details-filter">  
+                <p class="details__quantity-text" >Кол-во порций:</p>
+                <input class="details__input" type="number" id="itemCount" min="1" value="1"> 
+            </div>
+            <button type="button" data-product="{{product.id}}" data-action="add" class="details__button add-btn update-cart">Корзина</button> 
+            <button type="button" class="details__button">Избранное</button>
+        </div>
+    </div>
+    <div class="product__details-info">
+        <h3 class="product__details-downtext">Описание</h3>
+        <br>
+        <h4 class="product__details-text" >{{product.description}}</h4>   
+    </div>
+</div>
+
+<script> 
+    let itemCount = 1; 
+    var spanEl = document.getElementById('quantity__id')
+    function minus(event) { if (itemCount > 0) { itemCount -= 1 } event.preventDefault()
+    return false; 
+    }
+    function plus(event) { itemCount += 1; spanEl.innerHTML = itemCount; event.preventDefault()}
+    
+</script>
+
+{% endblock body%}

@@ -1,0 +1,328 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>toydastarkhan.kz</title>
+        <link rel="stylesheet" href="{% static 'women/css/main.css' %}" />
+        <link rel="stylesheet" href="{% static 'women/libs/owl-carousel/assets/owl.carousel.min.css' %}" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap&subset=cyrillic-ext" rel="stylesheet"/>
+        <!-- Подключение иконок -->
+		<script src="https://kit.fontawesome.com/36c255653c.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        
+        <header class="header">
+            <div class="header__container">
+                <div class="header__logo">
+                    <img src="{% static 'women/img/logo.png' %}" alt="" width="60" height="60">
+                    <h5>Toy Dastarkhan</h5>
+                </div>
+                <form class="header__search" type="GET">
+                    <div class="header__search-input-wrapper">
+                        <input
+                            class="header__search-input"
+                            type="text"
+                            placeholder="Поиск"
+                        />
+                    </div>
+                   
+                    <div class="header__search-button-wrapper">
+                        <button class="header__search-button" type="submit">
+                            <img src="{% static 'women/img/icons/search-icon.svg' %}" alt="" />
+                        </button>
+                    </div>
+                </form>
+                <div class="header__links">
+                    <!-- Cart link -->
+                    <a href="#" class="header-link header-link--notify">
+                        <span class="header-link__icon">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="21"
+                                height="20"
+                                viewBox="0 0 21 20"
+                            >
+                                <g>
+                                    <path
+                                        d="M16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2c1.099 0 2-.9 2-2s-.901-2-2-2zM4.008 18c0 1.1.89 2 1.99 2 1.102 0 2-.9 2-2s-.898-2-2-2c-1.1 0-1.99.9-1.99 2zM14.55 9H7.53l-.13-.27L5.16 4h12.15zM3.27 0H0v2H2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C4 14.1 4.9 15 6 15h12v-2H6.42a.256.256 0 0 1-.25-.25l.03-.12L7.1 11h7.45c.75 0 1.409-.41 1.75-1.03l3.861-7.01-.16-.96H4.21z"
+                                    />
+                                </g>
+                            </svg>
+                        </span>
+                        <span class="header-link__text">Корзина</span>
+                    </a>
+                    <!-- // Cart link -->
+                    <!-- Wishlist link -->
+                    <a href="#" class="header-link">
+                        <span class="header-link__icon">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="19"
+                                viewBox="0 0 20 19"
+                            >
+                                <path
+                                    d="M10.1 15.55l-.1.1-.1-.1C5.14 11.24 2 8.39 2 5.5 2 3.5 3.5 2 5.5 2c1.54 0 3.038.99 3.569 2.36h1.871C11.46 2.99 12.96 2 14.5 2c2.002 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.898 10.05zM14.5 0c-1.74 0-3.41.81-4.5 2.09C8.912.81 7.24 0 5.5 0 2.42 0 0 2.42 0 5.5c0 3.78 3.4 6.86 8.55 11.54L10 18.35l1.451-1.32C16.6 12.36 20 9.28 20 5.5 20 2.42 17.58 0 14.5 0z"
+                                />
+                            </svg>
+                        </span>
+                        <span class="header-link__text">Избранное</span>
+                    </a>
+                    <!-- // Wishlist link -->
+                    <!-- User link -->
+                    <a href="/sing" class="header-link">
+                        <span class="header-link__icon">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    d="M16 13v3H0v-3c0-2.66 5.33-4 8-4s8 1.34 8 4zm-4.002-9c0 2.21-1.789 4-3.998 4a3.997 3.997 0 0 1-4-4c0-2.21 1.788-4 4-4 2.21 0 3.998 1.79 3.998 4zm-10.1 9v1.1H14.1V13c0-.64-3.13-2.1-6.1-2.1-2.968 0-6.1 1.46-6.1 2.1zM5.9 4a2.101 2.101 0 0 0 4.202 0A2.101 2.101 0 0 0 5.9 4z"
+                                />
+                            </svg>
+                        </span>
+                        <span class="header-link__text">Войти</span>
+                    </a>
+                    <!-- // User link -->
+                </div>
+            </div>
+            <div class="header__nav">
+                <nav class="header-nav">
+                    <div class="header-nav__categories">
+                        <a href="/categories" class="header-mega-menu-link">
+                            <span class="header-mega-menu-link__icon">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="18"
+                                    height="12"
+                                    viewBox="0 0 18 12"
+                                >
+                                    <path
+                                        d="M18 0v2H0V0zM0 5h18v2H0zm0 5h18v2H0z"
+                                    />
+                                </svg>
+                            </span>
+                            <span class="header-mega-menu-link__text"
+                                >Категории</span
+                            >
+                        </a>
+                    </div>
+                    <div class="header-nav__deals">
+                        <a href="/action" class="header-nav__link">Акции</a>
+                        <a href="/nashe_proizvodstvo" class="header-nav__link">Производство</a>
+                        <a href="/receips" class="header-nav__link">Рецепты</a>
+                        <a href="/contacts" class="header-nav__link">Контакты</a>
+                    </div>
+
+                    <!-- header-nav__select -->
+                    <div class="header-nav__select">
+                        <!-- ITEM -->
+                        <div class="header-nav__select-item">
+                            <!-- dropdown nav -->
+                            <div class="nav-dropdown">
+                                <a href="/help" class="nav-dropdown__title">
+                                    Помощь
+
+                                    <div class="nav-dropdown__title-icon">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="8"
+                                            height="5"
+                                            viewBox="0 0 8 5"
+                                        >
+                                            <path
+                                                d="M3.998 5L8 2.5V.104L3.998 2.62 0 0v2.5z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </a>
+                                <div class="nav-dropdown__dropdown">
+                                    <a
+                                        href="/payment"
+                                        class="nav-dropdown__dropdown-item"
+                                    >
+                                        Оплата
+                                    </a>
+                                    <a
+                                        href="/faq"
+                                        class="nav-dropdown__dropdown-item"
+                                    >
+                                        Вопросы
+                                    </a>
+                                    <a
+                                        href="/delivery"
+                                        class="nav-dropdown__dropdown-item"
+                                    >
+                                        Доставка
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- // dropdown nav -->
+                        </div>
+                        <!-- // ITEM -->
+                        <!-- ITEM -->
+                
+                        <!-- // ITEM -->
+                        <!-- ITEM -->
+                        <div class="header-nav__select-item">
+                            <!-- dropdown nav -->
+                            <div class="nav-dropdown">
+                                <a href="#" class="nav-dropdown__title">
+                                    Язык
+
+                                    <div class="nav-dropdown__title-icon">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="8"
+                                            height="5"
+                                            viewBox="0 0 8 5"
+                                        >
+                                            <path
+                                                d="M3.998 5L8 2.5V.104L3.998 2.62 0 0v2.5z"
+                                            />
+                                        </svg>
+                                    </div>
+                                </a>
+                                <div class="nav-dropdown__dropdown">
+                                    <a
+                                        href="#"
+                                        class="nav-dropdown__dropdown-item"
+                                    >
+                                        Русский
+                                    </a>
+                                    <a
+                                        href="#"
+                                        class="nav-dropdown__dropdown-item"
+                                    >
+                                        Казахский
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- // dropdown nav -->
+                        </div>
+                        <!-- // ITEM -->
+                    </div>
+                    <!-- // header-nav__select -->
+                </nav>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="transition">
+                <a class="transition__link" href="/">Главная</a>
+                <a class="transition__link" href="/personal">/ Персональный раздел /</a>
+                <a class="transition__link" href="/personal"> Мой кабинет /</a>
+                Персональные данные
+                
+            </div>
+            <h5 class="contacts__title">Персональный раздел</h5>
+
+            <div class="page">
+                <form action="#" class="private__block">
+                    <div class="private__form">
+                        <div class="private__form-two">
+                            <label for="name" class="private__text">Имя:</label>
+                            <div class="private-block__input">
+                                <input type="text" name="NAME" maxlength="50" class="private__input">
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="private__form">
+                        <div class="private__form-two">
+                            <label for="last-name" class="private__text">Фамилия:</label>
+                            <div class="private-block__input">
+                                <input type="text" name="LAST__NAME" maxlength="50" class="private__input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="private__form">
+                        <div class="private__form-two">
+                            <label for="second-name" class="private__text">Отчество:</label>
+                            <div class="private-block__input">
+                                <input type="text" name="SECOND__NAME" maxlength="50" class="private__input">
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="private__form">
+                        <div class="private__form-two">
+                            <label for="Email" class="private__text">E-Mail:</label>
+                            <div class="private-block__input">
+                                <input type="text" name="E_MAIL" maxlength="50" class="private__input">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="private-instruction__password">Пароль должен быть не менее 6 символов в длину</p>
+                    <div class="private__form">
+                        <div class="private__form-two">
+                            <label for="password" class="private__text">Новый пароль:</label>
+                            <div class="private-block__input">
+                                <input type="password" name="PASSWORD" maxlength="50" class="private__input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="private__form">
+                        <div class="private__form-two">
+                            <label for="password_confirm" class="private__text">Подтверждение нового пароля:</label>
+                            <div class="private-block__input">
+                                <input type="password" name="PASSWORD_CONFIRN" maxlength="50" class="private__input">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="private__btn">
+                    <button class="private__btn-try">Сохранить</button>
+                    <button class="private__btn-false">Отмена</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__up">
+                    <div class="footer__logo">
+                        <img src="{% static 'women/img/logo.png' %}" alt="" width="70" height="70">
+                    </div>
+                    <div class="footer__nav">
+                        <a class="footer__nav-link" href="#">О компании</a>
+                        <a class="footer__nav-link" href="#">Новости</a>
+                        <a class="footer__nav-link" href="/services">Услуги и сервис</a>
+                        <a class="footer__nav-link" href="/contacts">Контакты</a>
+                    </div>
+                    <div class="footer__social">
+                        <a class="footer__social-link" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="footer__social-link" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="footer__social-link" href="https://www.instagram.com/toy_dastarhan/" target="_blank" ><i class="fab fa-instagram"></i></a>
+                        <a class="footer__social-link" href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+                <div class="footer__down">
+                    <div class="footer__year">
+                        © 2020. Toy Dastarkhan
+                    </div>
+                    <p>Принимаемые способы оплаты:</p>
+                    <div class="footer__payment">
+                        <a class="footer__payment-link" href="#"><img src="{% static 'women/img/fondy.png' %}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- jQuery -->
+        <script src="{% static 'women/libs/jquery/jquery-3.3.1.min.js' %}"></script>
+        <!-- OwmCarousel -->
+        <script src="{% static 'women/libs/owl-carousel/owl.carousel.min.js' %}"></script>
+
+        <script src="{% static 'women/js/header-select.js' %}"></script>
+        <script src="{% static 'women/js/main.js' %}"></script>
+    </body>
+</html>

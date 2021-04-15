@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% extends 'store/main.html' %}
+{% load static %}
+{% block carousel %}
+
+{% endblock %}
+{% block title %}
+{% endblock title %}
+{% block body%}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box-element">
+
+                <a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Вернуться в магазин</a>
+                <br>
+                <br>
+                <table class="table">
+                    <tr>
+                        <th><h5>Количество продуктов: <strong>{{order.get_cart_items}}</strong></h5></th>
+                        <th><h5>Общая сумма:<strong> ${{order.get_cart_total|floatformat:2}}</strong></h5></th>
+                        <th>
+                            <a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Оформить заказ</a>
+                        </th>
+                    </tr>
+                </table>
+
+            </div>
+
+            <br>
+            <div class="box-element">
+                
+                <div class="cart-row">
+                    <div style="flex:2"></div>
+                    <div style="flex:2"><strong>Название</strong></div>
+                    <div style="flex:1"><strong>Цена</strong></div>
+                    <div style="flex:1"><strong>Количество</strong></div>
+                    <div style="flex:1"><strong>Общая сумма</strong></div>
+                </div>
+                {% for item in items %}
+                <div class="cart-row">
+                    <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+                    <div style="flex:2"><p class="color__text" >{{item.product.name}}</p></div>
+                    <div style="flex:1"><p class="color__text" >${{item.product.price|floatformat:2}}</p></div>
+                    <div style="flex:1">
+                        <div class="quantity">
+                            <img data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart" src="{% static  'images/arrow-up.png' %}">
+                            <p class="quantity">{{item.quantity}}</p>
+                            <img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
+                        </div>
+                    </div>
+                    <div style="flex:1"><p class="color__text">${{item.get_total}}</p></div>
+                </div>
+                {% endfor %}
+             </div>
+        </div>
+    </div>
+    {% endblock body%}
+    
+

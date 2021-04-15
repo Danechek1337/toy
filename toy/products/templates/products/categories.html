@@ -1,0 +1,29 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block carousel %}
+{% endblock %}
+{% block title %}
+{% endblock title %}
+{% block body%}
+
+    <div class="transition">
+        <a class="transition__link" href="/">Главная</a>
+            / Категории
+    </div>
+    <h5 class="contacts__title">Категории товаров</h5>
+    <div class="page">
+        <div class="production">
+            {% for category in categories %}
+            <a href="{% url 'category_products' category.pk %}" class="production__item">
+                <div class="production__icon">
+                    <img src="{{category.image.url}}" alt="bludo" />
+                </div>
+                <div class="production__text">{{category.name}}</div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock body %}
+        
+

@@ -1,0 +1,80 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block carousel %}
+
+{% endblock %}
+{% block title %}
+{% endblock title %}
+{% block body%}
+
+    <div class="transition">
+        <a class="transition__link" href="/">Главная</a>
+        <a class="transition__link" href="{% url 'personal' %}">/ Персональный раздел /</a>
+            Мой кабинет
+    </div>
+    <h5 class="contacts__title">Персональный раздел</h5>
+    <div class="page">
+    <div class="personal__page">
+        <a href="/orders" class="personal__item">
+            <div class="personal__icon">
+                <i class="fas fa-calculator fa-4x"></i>
+            </div>
+            <div class="personal__text">Текущие заказы</div>
+        </a>
+        <a href="/private" class="personal__item">
+            <div class="personal__icon">
+                <i class="fas fa-user-cog fa-4x"></i>
+            </div>
+            <div class="personal__text">Личные данные</div>
+        </a>
+        <a href="#" class="personal__item">
+            <div class="personal__icon">
+                <i class="fas fa-history fa-4x"></i>
+            </div>
+            <div class="personal__text">История заказов</div>
+        </a>
+    </div>
+    <div class="personal__page">
+        <a href="/profiles" class="personal__item">
+            <div class="personal__icon">
+                <i class="fas fa-list-ol fa-4x"></i>
+            </div>
+            <div class="personal__text">Профили заказов</div>
+        </a>
+        <a href="{% url 'cart' %}" class="personal__item">
+            <div class="personal__icon">
+                <i class="fas fa-shopping-cart fa-4x"></i>
+            </div>
+            <div class="personal__text">Корзина</div>
+        </a>
+        <a href="/subscribe" class="personal__item">
+            <div class="personal__icon">
+                <i class="fas fa-envelope fa-4x"></i>
+            </div>
+            <div class="personal__text">Подписки</div>
+        </a>
+    </div>
+    <div class="personal__page">
+        <a href="/contacts" class="personal__item">
+            <div class="personal__icon">
+                <i class="fas fa-phone-square-alt fa-4x"></i>
+            </div>
+            <div class="personal__text">Контакты</div>
+        </a>
+        <a href="/favorite" class="personal__item">
+            <div class="personal__icon">
+                <i class="fas fa-star fa-4x"></i>
+            </div>
+            <div class="personal__text">Избранные товары</div>
+        </a>
+        <a href="/viewed" class="personal__item">
+            <div class="personal__icon">
+                <i class="fas fa-eye fa-4x"></i>
+            </div>
+            <div class="personal__text">Просмотренные товары</div>
+        </a>
+    </div>
+    </div>
+</div>
+
+{% endblock body %}

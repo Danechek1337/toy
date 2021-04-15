@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% extends 'store/main.html' %}
+{% load static %}
+{% block carousel %}
+{% endblock %}
+{% block title %}
+{% endblock title %}
+{% block body%}
+
+  
+    <div class="page">
+        <div class="bludo">
+            <div class="bludo__text">Сортировка:</div>
+            <a class="bludo__link" href="{% url 'category_products' categoryid %}?sort=name">по имени
+                <i class="fas fa-dot-circle fa"></i>
+            </a>
+            <a class="bludo__link" href="{% url 'category_products' categoryid %}?sort=price">сначала дешёвые
+                <i class="fas fa-dot-circle fa"></i>
+            </a>
+            <a class="bludo__link" href="{% url 'category_products' categoryid %}?sort=-price">сначала дорогие
+                <i class="fas fa-dot-circle fa"></i>
+            </a>    
+        </div>
+        <!-- cards-wrapper -->
+        <div class="row">
+            {% for product in page %}
+            <div class="col-lg-4 remove-padding">
+                <img class="thumbnail height-cart" src="{{product.imageURL}}">
+                <div class="box-element product">
+                    <h6>
+                        <strong>{{product.name}}</strong>
+                    </h6>
+                    <hr>
+    
+                    <!-- <button type="button" data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Добавить</button> -->
+                        <a type="button" data-product="{{product.id}}" data-action="add" class="btn-outline-secondary add-btn update-cart bg-white">
+                            <i id="cart-icon" class="fab fa-opencart fa-2x"></i>
+                        </a>
+                        <a class="view__cart" href="#">
+                            <i class="far fa-heart fa-2x"></i>
+                        </a>
+                        <a class="view__cart" href="{% url 'product_details' product.slug %}">
+                            <i class="far fa-eye fa-2x"></i>
+                        </a>
+                    <h4 style="display: inline-block; float: right">
+                        <strong>${{product.price|floatformat:2}}</strong>
+                    </h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            {% if page.has_previous %}
+            <a class="pagination__item" href="{% url 'category_products' categoryid %}?page={{page.previous_page_number}}">
+                <i class="fas fa-chevron-left fa-3x"></i>
+            </a>
+            {% endif %}
+            {% if page.has_next %}
+            <a class="pagination__item" href="{% url 'category_products' categoryid %}?page={{page.next_page_number}}">
+                <i class="fas fa-chevron-right fa-3x"></i>
+            </a>
+            {% endif %}
+        </div>
+        <!-- // cards-wrapper -->
+    </div>
+        
+ {% endblock body %}

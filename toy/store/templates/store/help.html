@@ -1,0 +1,43 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block carousel %}
+{% endblock %}
+{% block title %}
+{% endblock title %}
+{% block body%}
+
+        <div class="transition">
+            <a class="transition__link" href="/">Главная</a>
+                / Помощь
+        </div>
+        <h5 class="contacts__title">Помощь</h5>
+        <div class="page">
+            <div class="help__block">
+                <div class="help__row">
+                    <a href="#" class="help__element">
+                        <div class="help__item">Как сделать заказ?</div>
+                    </a>
+                    <a href="/payment" class="help__element">
+                        <div class="help__item">Способы оплаты</div>
+                    </a>
+                    <a href="/delivery" class="help__element">
+                        <div class="help__item">Доставка</div>
+                    </a>
+                </div>
+            
+                <div class="help__row">
+                    <a href="/faq" class="help__element">
+                        <div class="help__item">Вопросы и ответы</div>
+                    </a>
+                    <a href="#" class="help__element">
+                        <div class="help__item">Правильное питание</div>
+                    </a>
+                    <a href="#" class="help__element">
+                        <div class="help__item">Политика конфиденциальности</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    
+
+{% endblock body %}

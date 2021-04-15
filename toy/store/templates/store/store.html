@@ -1,0 +1,103 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% extends 'store/main.html' %}
+{% load static %}
+{% block body %}
+{% block title %}
+{% endblock title %}
+<div class="main__row">
+    <!-- main__column-left  -->
+    <div class="main__column-left">
+        <!-- navigation -->
+        <nav class="navigation">
+            <ul class="navigation__list">
+                {% for category in categories %}
+                <a href="{% url 'category_products' category.pk %}" class="navigation__item">
+                    <div class="navigation__item-icon">
+                
+                    </div>
+                    <div class="navigation__item-title">
+                        {{category.name}}
+                    </div>
+                    <div class="navigation__item-arrow">
+                        <svg
+                            class="navigation__icon-arrow"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="6"
+                            height="10"
+                            viewBox="0 0 6 10"
+                        >
+                            <path
+                                d="M6.001 5.002L2.999 0H.126l3.018 5.002L0 10h3z"
+                            />
+                        </svg>
+                    </div>
+                </a>
+                {% endfor %}
+            </ul>
+        </nav>
+        <!-- // navigation -->
+
+        <!-- banner -->
+        <aside class="info-block">
+            <div class="info-block__title">
+                <i class="far fa-clock fa-3x"></i>
+            </div>
+            <div class="info-block__subtitle">
+                Ежедневно: 8:00 - 18:00
+            </div>
+        </aside>
+        <!-- // banner -->
+    </div>
+    <!-- // main__column-left  -->
+    <!-- main__column-right -->
+    <div class="main__column-right">
+        <!-- tabs plate -->
+        <div class="tabs">
+            <button class="tabs__btn tabs__btn--active">
+                Новое
+            </button>
+            <button class="tabs__btn">Популярное</button>
+        </div>
+        <!-- // tabs plate -->
+
+        <!-- cards-wrapper -->
+        <!-- <div class="cards-wrapper"> -->
+
+            <!-- card -->
+            <div class="row">
+                {% for product in products %}
+                <div class="col-lg-4 remove-padding">
+                    <img class="thumbnail height-thumbnail" src="{{product.imageURL}}">
+                    <div class="box-element product">
+                        <h6>
+                            <strong>{{product.name}}</strong>
+                        </h6>
+                        <hr>
+        
+                        <!-- <button type="button" data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Добавить</button> -->
+                            <a type="button" data-product="{{product.id}}" data-action="add" class="btn-outline-secondary add-btn update-cart bg-white">
+                                <i id="cart-icon" class="fab fa-opencart fa-2x"></i>
+                            </a>
+                            <a class="view__cart" href="#">
+                                <i class="far fa-heart fa-2x"></i>
+                            </a>
+                            <a class="view__cart" href="{% url 'product_details' product.slug %}">
+                                <i class="far fa-eye fa-2x"></i>
+                            </a>
+                        <h4 style="display: inline-block; float: right">
+                            <strong>${{product.price|floatformat:2}}</strong>
+                        </h4>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- // card -->
+
+        <!-- </div> -->
+        <!-- // cards-wrapper -->
+    </div>
+    <!-- // main__column-right -->
+</div>
+    
+{% endblock body %}
+
